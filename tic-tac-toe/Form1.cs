@@ -10,62 +10,20 @@ using System.Windows.Forms;
 
 namespace tic_tac_toe
 {
-    public partial class Form1 : Form
+    public class TicTacToe
     {
-
+        private char _turn = 'X';
+        public char turn
+        {
+            get { return _turn; }
+            set { _turn = value; }
+        }
         public int[] listOfX = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         public int[] listOfO = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-        public char turn = 'X';
+        public TicTacToe() {}
 
-        public Form1()
-        {
-            InitializeComponent();
-
-            this.turnLable.Text = "X";
-        }
-
-        void reset()
-        {
-            void resetByGivenArray(int[] givenArray)
-            {
-                for(int i=0;i< givenArray.Length; i++)
-                {
-                    givenArray[i] = 0;
-                }
-            }
-
-            resetByGivenArray(listOfX);
-            resetByGivenArray(listOfO);
-
-            this.button1.Text = "";
-            this.button2.Text = "";
-            this.button3.Text = "";
-            this.button4.Text = "";
-            this.button5.Text = "";
-            this.button6.Text = "";
-            this.button7.Text = "";
-            this.button8.Text = "";
-            this.button9.Text = "";
-
-            this.turnLable.Text = "X";
-        }
-
-        void changeTurn()
-        {
-            if (turn == 'X')
-            {
-                turn = 'O';
-                this.turnLable.Text = "O";
-            }
-            else 
-            {
-                turn = 'X';
-                this.turnLable.Text = "X";
-            }
-        }
-
-        Boolean checkForWinForGivenList(int[] givenList)
+        private Boolean checkForWinForGivenList(int[] givenList)
         {
             Boolean conditions1 = givenList[0] == 1 && givenList[1] == 1 && givenList[2] == 1;
             Boolean conditions2 = givenList[3] == 1 && givenList[4] == 1 && givenList[5] == 1;
@@ -81,33 +39,29 @@ namespace tic_tac_toe
             return (conditions1 || conditions2 || conditions3 || conditions4 || conditions5 || conditions6 || conditions7 || conditions8);
         }
 
-
-        Boolean checkForWin()
+        public Boolean checkForWin()
         {
             if (checkForWinForGivenList(listOfX))
             {
                 MessageBox.Show("X wins");
-                reset();
                 return true;
             }
 
             if (checkForWinForGivenList(listOfO))
             {
                 MessageBox.Show("O wins");
-                reset();
                 return true;
             }
             return false;
         }
 
-
-        Boolean checkForDraw()
+        public Boolean checkForDraw()
         {
-            
+
             int loopIntoGivenArray(int[] givenArray)
             {
                 int countOfFilled = 0;
-                foreach(int val in givenArray)
+                foreach (int val in givenArray)
                 {
                     if (val == 1)
                         countOfFilled += 1;
@@ -115,35 +69,100 @@ namespace tic_tac_toe
                 return countOfFilled;
             }
 
-            if(loopIntoGivenArray(listOfX) + loopIntoGivenArray(listOfO) >= 9)
+            if (loopIntoGivenArray(listOfX) + loopIntoGivenArray(listOfO) >= 9)
             {
                 MessageBox.Show("Draw");
-                reset();
                 return true;
             }
             return false;
-                
         }
+
+        public void resetArrays()
+        {
+            void resetByGivenArray(int[] givenArray)
+            {
+                for (int i = 0; i < givenArray.Length; i++)
+                {
+                    givenArray[i] = 0;
+                }
+            }
+
+            resetByGivenArray(listOfX);
+            resetByGivenArray(listOfO);
+        }
+    }
+
+    public partial class Form1 : Form
+    {
+
+        TicTacToe ticTacToe = new TicTacToe();
+
+        public Form1()
+        {
+            InitializeComponent();
+
+            this.turnLable.Text = ticTacToe.turn.ToString();
+        }
+
+        void reset()
+        {
+
+            ticTacToe.resetArrays();
+
+            this.button1.Text = "";
+            this.button2.Text = "";
+            this.button3.Text = "";
+            this.button4.Text = "";
+            this.button5.Text = "";
+            this.button6.Text = "";
+            this.button7.Text = "";
+            this.button8.Text = "";
+            this.button9.Text = "";
+
+            this.turnLable.Text = ticTacToe.turn.ToString();
+        }
+
+        void changeTurn()
+        {
+            if (ticTacToe.turn == 'X')
+            {
+                ticTacToe.turn = 'O';
+                this.turnLable.Text = "O";
+            }
+            else 
+            {
+                ticTacToe.turn = 'X';
+                this.turnLable.Text = "X";
+            }
+        }
+
 
         void doClick(int index, Button button)
         {
-            if (listOfX[index] == 0 && listOfO[index] == 0)
+            if (ticTacToe.listOfX[index] == 0 && ticTacToe.listOfO[index] == 0)
             {
-                if (turn == 'X')
+                if (ticTacToe.turn == 'X')
                 {
                     button.Text = "X";
-                    listOfX[index] = 1;
+                    ticTacToe.listOfX[index] = 1;
                 }
 
                 else
                 {
                     button.Text = "O";
-                    listOfO[index] = 1;
+                    ticTacToe.listOfO[index] = 1;
                 }
-                if (checkForWin())
+
+                if (ticTacToe.checkForWin())
+                {
+                    reset();
                     return;
-                if (checkForDraw())
+                }
+                if (ticTacToe.checkForDraw())
+                {
+                    reset();
                     return;
+                }
                 changeTurn();
             }
             else

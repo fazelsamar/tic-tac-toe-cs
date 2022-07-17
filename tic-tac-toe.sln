@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tic-tac-toe", "tic-tac-toe\tic-tac-toe.csproj", "{7668D1EA-BE1F-437F-B852-3A7FABBC8FDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsApp1", "..\oo-tic-tac-toe-cs\WinFormsApp1\WinFormsApp1.csproj", "{F6230FD3-FF73-4CD7-9455-94273FB189C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7668D1EA-BE1F-437F-B852-3A7FABBC8FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7668D1EA-BE1F-437F-B852-3A7FABBC8FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7668D1EA-BE1F-437F-B852-3A7FABBC8FDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6230FD3-FF73-4CD7-9455-94273FB189C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6230FD3-FF73-4CD7-9455-94273FB189C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6230FD3-FF73-4CD7-9455-94273FB189C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6230FD3-FF73-4CD7-9455-94273FB189C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
